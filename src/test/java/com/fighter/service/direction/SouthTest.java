@@ -30,6 +30,6 @@ public class SouthTest {
                 .moveToTown(player, inputTaker, null);
         player = south.move(player, null);
         assertEquals(Weapon.KNIFE, player.getWeapon());
-        assertEquals(PlayerUtils.HP, player.getHealthPower());
+        assertEquals(PlayerUtils.PLAYER_DEFAULT_HP, player.getHealthPower());
     }
 }

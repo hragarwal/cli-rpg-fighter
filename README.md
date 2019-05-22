@@ -26,6 +26,10 @@ Its a role playing game where in a fighter fights against all odds to enter the 
 - FileStore - This class is used to serialize & deserialize the state of the game
 - GameService - This service either starts or resume the game(if game was saved) based on user inputs
 
+### Assumptions
+- Game can be only be saved when the player is on the town entry point i.e. even if goes around the streets but in order to save he has to come back to town entry point
+- Expecting user to enter only numeric while selecting choices
+
 ### Future scope
 - Exception handling can be improved by using customized exceptions
 
