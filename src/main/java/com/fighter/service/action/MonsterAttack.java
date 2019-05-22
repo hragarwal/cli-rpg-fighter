@@ -9,13 +9,14 @@ import java.io.IOException;
 import java.util.Random;
 
 import static com.fighter.utils.Console.*;
+import static com.fighter.utils.InputUtils.getValidUserChoice;
 
 public class MonsterAttack implements Action {
 
-    private Player monster;
-    private Direction direction;
     private final CrossRoad crossRoad;
     private final BufferedReader inputTaker;
+    private Player monster;
+    private Direction direction;
     private Random random;
 
     public MonsterAttack(Player monster, Direction direction, CrossRoad crossRoad,
@@ -31,21 +32,21 @@ public class MonsterAttack implements Action {
     public Player perform(Player player, Player monster) throws IOException {
         int lossOfMonsterHP = getLossOfHPToMonster(player);
         this.monster.decreaseHealthPoint(lossOfMonsterHP);
-        displayMonsterDamageInfo(lossOfMonsterHP, this.monster.getHp());
+        displayMonsterDamageInfo(lossOfMonsterHP, this.monster.getHealthPower());
 
-        if (this.monster.getHp() <= 0) {
+        if (this.monster.getHealthPower() <= 0) {
             return playerWonMoveToCrossRoad(player);
         }
 
         int lossOfPlayerHP = getLossOfHPToPlayer();
         player.decreaseHealthPoint(lossOfPlayerHP);
-        displayPlayerDamageInfo(lossOfPlayerHP, player.getHp());
+        displayPlayerDamageInfo(lossOfPlayerHP, player.getHealthPower());
 
-        if (player.getHp() <= 0) {
+        if (player.getHealthPower() <= 0) {
             markPlayerDead();
+        } else {
+            direction.move(player, monster);
         }
-
-        direction.move(player, monster);
         return player;
     }
 
@@ -56,7 +57,7 @@ public class MonsterAttack implements Action {
     private Player playerWonMoveToCrossRoad(Player player) throws IOException {
         displayRingInfo();
         player.setSilverRingAvailable(true);
-        int choice = getUerChoice();
+        int choice = getValidUserChoice(inputTaker, 1, 1);
         if (choice == 1) {
             crossRoad.perform(player, monster);
         }
@@ -67,14 +68,5 @@ public class MonsterAttack implements Action {
         return Weapon.KNIFE.equals(player.getWeapon())
                 ? random.nextInt(5)
                 : random.nextInt(8);
-    }
-
-    private int getUerChoice() throws IOException {
-        int choice = Integer.parseInt(inputTaker.readLine());
-        while (choice != 1) {
-            System.out.println("No such option, please select again");
-            choice = Integer.parseInt(inputTaker.readLine());
-        }
-        return choice;
     }
 }

@@ -15,7 +15,7 @@ public class PlayerServiceTest {
         Player player = playerService.createCharacter(name);
         assertNotNull(player);
         assertEquals(name, player.getCharacterName());
-        assertEquals(10, player.getHp());
+        assertEquals(10, player.getHealthPower());
     }
 
     @Test
@@ -24,7 +24,7 @@ public class PlayerServiceTest {
         Player player = playerService.createMonster(name);
         assertNotNull(player);
         assertEquals(name, player.getCharacterName());
-        assertEquals(15, player.getHp());
+        assertEquals(15, player.getHealthPower());
         assertNull(player.getWeapon());
     }
 }

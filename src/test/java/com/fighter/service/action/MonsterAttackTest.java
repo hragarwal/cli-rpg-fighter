@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 import java.io.StringReader;
 import java.util.Random;
 
+import static com.fighter.enums.Weapon.SWORD;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -43,12 +44,13 @@ public class MonsterAttackTest {
     @Test
     public void shouldMarkPlayerAsWonIfMonsterHPIsZeroOrLess() throws Exception {
         //when
-        when(random.nextInt(5)).thenReturn(16);
+        player.setWeapon(SWORD);
+        when(random.nextInt(8)).thenReturn(16);
         doReturn(null).when(west).move(player, monster);
         doReturn(null).when(crossRoad).perform(player, monster);
         //then
         player = monsterAttack.perform(player, monster);
-        assertTrue(monster.getHp() <= 0);
+        assertTrue(monster.getHealthPower() <= 0);
         assertTrue(player.isSilverRingAvailable());
     }
 
@@ -61,7 +63,7 @@ public class MonsterAttackTest {
         doReturn(null).when(crossRoad).perform(player, monster);
         //then
         player = monsterAttack.perform(player, monster);
-        assertTrue(player.getHp() <= 0);
+        assertTrue(player.getHealthPower() <= 0);
         assertFalse(player.isSilverRingAvailable());
     }
 
@@ -74,8 +76,8 @@ public class MonsterAttackTest {
         doReturn(null).when(crossRoad).perform(player, monster);
         //then
         player = monsterAttack.perform(player, monster);
-        assertThat("player hp", 6, is(player.getHp()));
-        assertThat("monster hp", 13, is(monster.getHp()));
+        assertThat("player healthPower", 6, is(player.getHealthPower()));
+        assertThat("monster healthPower", 13, is(monster.getHealthPower()));
         verify(west, times(1)).move(player, monster);
     }
 }

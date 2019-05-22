@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 import static com.fighter.utils.Console.displayNorthSideOptions;
+import static com.fighter.utils.InputUtils.getValidUserChoice;
 
 public class North implements Direction {
     private BufferedReader inputTaker;
@@ -22,13 +23,8 @@ public class North implements Direction {
     public Player move(Player player, Player monster) throws IOException {
         Console.displayRiverInfo();
         player.increaseHealthPoint(1);
-        displayNorthSideOptions(player.getHp());
-
-        int choice = Integer.parseInt(inputTaker.readLine());
-        while (choice != 1) {
-            System.out.println("No such direction, please select again");
-            choice = Integer.parseInt(inputTaker.readLine());
-        }
+        displayNorthSideOptions(player.getHealthPower());
+        getValidUserChoice(inputTaker, 1, 1);
         crossRoad.perform(player, monster);
         return player;
     }

@@ -28,7 +28,7 @@ public class GuardAttack implements Action {
     private void attackGuard(Player player, BufferedReader inputTaker) throws IOException {
         displayGuardAttackInfo();
         player.decreaseHealthPoint(1);
-        displayGuardAttackInfo(player.getHp());
+        displayGuardAttackInfo(player.getHealthPower());
         waitForUserInputToProceed(inputTaker);
     }
 }

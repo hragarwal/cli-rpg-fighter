@@ -9,6 +9,7 @@ import java.io.IOException;
 import static com.fighter.enums.Weapon.SWORD;
 import static com.fighter.utils.Console.displayEastSideOptions;
 import static com.fighter.utils.Console.displaySwordInfo;
+import static com.fighter.utils.InputUtils.getValidUserChoice;
 
 public class East implements Direction {
 
@@ -23,11 +24,7 @@ public class East implements Direction {
     @Override
     public Player move(Player player, Player monster) throws IOException {
         getSword(player);
-        int choice = Integer.parseInt(inputTaker.readLine());
-        while (choice != 1) {
-            System.out.println("No such direction, please select again");
-            choice = Integer.parseInt(inputTaker.readLine());
-        }
+        getValidUserChoice(inputTaker, 1, 1);
         crossRoad.perform(player, monster);
         return player;
     }

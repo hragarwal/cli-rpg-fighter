@@ -29,6 +29,6 @@ public class GuardAttackTest {
         Player player = PlayerUtils.createCharacter(character);
         doNothing().when(townService).moveToTown(any(), any(), any());
         player = guardAttack.perform(player, null);
-        Assert.assertEquals(PlayerUtils.HP - 1, player.getHp());
+        Assert.assertEquals(PlayerUtils.HP - 1, player.getHealthPower());
     }
 }

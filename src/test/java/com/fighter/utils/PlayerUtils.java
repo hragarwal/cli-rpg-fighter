@@ -13,7 +13,7 @@ public class PlayerUtils {
         return Player.builder()
                 .characterName(name)
                 .silverRingAvailable(false)
-                .hp(HP)
+                .healthPower(HP)
                 .weapon(KNIFE)
                 .build();
     }
@@ -22,7 +22,7 @@ public class PlayerUtils {
         return Player.builder()
                 .characterName(name)
                 .silverRingAvailable(false)
-                .hp(MONSTER_HP)
+                .healthPower(MONSTER_HP)
                 .weapon(null)
                 .build();
     }

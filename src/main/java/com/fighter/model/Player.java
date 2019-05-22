@@ -14,15 +14,15 @@ public class Player implements Serializable {
     private static final long serialVersionUID = 7187643650912731042L;
 
     private String characterName;
-    private int hp;
+    private int healthPower;
     private Weapon weapon;
     private boolean silverRingAvailable;
 
-    public void decreaseHealthPoint(int hp) {
-        this.setHp(this.hp - hp);
+    public void decreaseHealthPoint(int healthPower) {
+        this.setHealthPower(this.healthPower - healthPower);
     }
 
-    public void increaseHealthPoint(int hp) {
-        this.setHp(this.hp + hp);
+    public void increaseHealthPoint(int healthPower) {
+        this.setHealthPower(this.healthPower + healthPower);
     }
 }

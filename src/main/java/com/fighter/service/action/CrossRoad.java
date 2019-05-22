@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 import static com.fighter.utils.Console.displayCrossRoadChoice;
+import static com.fighter.utils.InputUtils.getValidUserChoice;
 
 public class CrossRoad implements Action {
     private BufferedReader inputTaker;
@@ -27,11 +28,7 @@ public class CrossRoad implements Action {
     public Direction moveToCrossRoad(BufferedReader inputTaker, Player monster) throws IOException {
         displayCrossRoadChoice();
         Direction direction;
-        int choice = getChoice(inputTaker);
-        while (!(choice >= 1 && choice <= 4)) {
-            System.out.println("No such direction, please select again");
-            choice = getChoice(inputTaker);
-        }
+        int choice = getValidUserChoice(inputTaker, 1, 4);
         switch (choice) {
             case 1:
                 direction = new North(inputTaker, this);
@@ -47,9 +44,5 @@ public class CrossRoad implements Action {
                 break;
         }
         return direction;
-    }
-
-    private int getChoice(BufferedReader inputTaker) throws IOException {
-        return Integer.parseInt(inputTaker.readLine());
     }
 }

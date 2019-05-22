@@ -38,11 +38,11 @@ public class WestTest {
         West west = new West(inputTaker, crossRoad);
         //when
         Player playerAfterAttack = PlayerUtils.createCharacter("Meow");
-        playerAfterAttack.setHp(7);
+        playerAfterAttack.setHealthPower(7);
         doReturn(playerAfterAttack).when(crossRoad).perform(player, monster);
         //then
         west.move(player, monster);
-        Assert.assertEquals(7, playerAfterAttack.getHp());
+        Assert.assertEquals(7, playerAfterAttack.getHealthPower());
     }
 
 }

@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 import static com.fighter.utils.Console.displayTownGateChoice;
+import static com.fighter.utils.InputUtils.getValidUserChoice;
 
 public class TownService {
 
@@ -18,18 +19,15 @@ public class TownService {
 
     private void executeChoice(Player player, BufferedReader inputTaker,
                                int choice, Player monster) throws IOException {
+        Action action = getUserAction(player, inputTaker, choice);
+        action.perform(player, monster);
+    }
+
+    public Action getUserAction(Player player, BufferedReader inputTaker, int choice) {
         Action action;
-        while (!(choice >= 1 && choice <= 4)) {
-            System.out.println("No such action available, please select again");
-            choice = getChoice(inputTaker);
-        }
         switch (choice) {
             case 1:
-                if (player.isSilverRingAvailable()) {
-                    action = new Entry();
-                } else {
-                    action = new Talk(inputTaker, this);
-                }
+                action = player.isSilverRingAvailable() ? new Entry() : new Talk(inputTaker, this);
                 break;
             case 2:
                 action = new GuardAttack(inputTaker, this);
@@ -40,7 +38,7 @@ public class TownService {
             default:
                 action = new Save(activityService);
         }
-        action.perform(player, monster);
+        return action;
     }
 
     public void moveToTown(Player player, BufferedReader inputTaker, Player monster) throws IOException {
@@ -50,10 +48,6 @@ public class TownService {
 
     private int getPlayerChoice(BufferedReader inputTaker) throws IOException {
         displayTownGateChoice();
-        return getChoice(inputTaker);
-    }
-
-    private int getChoice(BufferedReader inputTaker) throws IOException {
-        return Integer.parseInt(inputTaker.readLine());
+        return getValidUserChoice(inputTaker, 1, 4);
     }
 }

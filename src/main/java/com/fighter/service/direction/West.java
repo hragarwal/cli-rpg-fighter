@@ -10,11 +10,12 @@ import java.io.IOException;
 import java.util.Random;
 
 import static com.fighter.utils.Console.displayWestSideOptions;
+import static com.fighter.utils.InputUtils.getValidUserChoice;
 
 
 public class West implements Direction {
-    private BufferedReader inputTaker;
     private final CrossRoad crossRoad;
+    private BufferedReader inputTaker;
 
     public West(BufferedReader inputTaker, CrossRoad crossRoad) {
         this.inputTaker = inputTaker;
@@ -25,7 +26,7 @@ public class West implements Direction {
     public Player move(Player player, Player monster) throws IOException {
         displayWestSideOptions();
         Action action;
-        int choice = getChoice();
+        int choice = getValidUserChoice(inputTaker, 1, 2);
         switch (choice) {
             case 1:
                 action = getMonsterAttack(monster);
@@ -37,16 +38,7 @@ public class West implements Direction {
         return player;
     }
 
-    public MonsterAttack getMonsterAttack(Player monster) {
+    private MonsterAttack getMonsterAttack(Player monster) {
         return new MonsterAttack(monster, this, crossRoad, inputTaker, new Random());
-    }
-
-    private int getChoice() throws IOException {
-        int choice = Integer.parseInt(inputTaker.readLine());
-        while (!(choice >= 1 && choice <= 2)) {
-            System.out.println("No such option available, please select again");
-            choice = Integer.parseInt(inputTaker.readLine());
-        }
-        return choice;
     }
 }

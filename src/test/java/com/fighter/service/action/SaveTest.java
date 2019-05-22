@@ -22,4 +22,13 @@ public class SaveTest {
         assertNotNull(player);
     }
 
+    @Test
+    public void shouldDisplayErrorMessageToUserIfGameIsNotSaved() {
+        ActivityService activityService = spy(new ActivityService(new FileStore()));
+        Save save = new Save(activityService);
+        when(activityService.saveActivity(any())).thenReturn(false);
+        Player player = save.perform(createCharacter("ShaktiMan"), null);
+        assertNotNull(player);
+    }
+
 }

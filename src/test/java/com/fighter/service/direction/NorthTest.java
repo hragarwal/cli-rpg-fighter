@@ -24,6 +24,6 @@ public class NorthTest {
         North north = new North(inputTaker, crossRoad);
         doReturn(null).when(crossRoad).perform(any(), any());
         Player player = north.move(PlayerUtils.createCharacter(character), null);
-        Assert.assertEquals(PlayerUtils.HP + 1, player.getHp());
+        Assert.assertEquals(PlayerUtils.HP + 1, player.getHealthPower());
     }
 }

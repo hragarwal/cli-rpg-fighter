@@ -27,6 +27,6 @@ public class TalkTest {
         Talk talk = new Talk(inputTaker, townService);
         doNothing().when(townService).moveToTown(player, inputTaker, null);
         player = talk.perform(player, null);
-        assertEquals(10, player.getHp());
+        assertEquals(10, player.getHealthPower());
     }
 }
