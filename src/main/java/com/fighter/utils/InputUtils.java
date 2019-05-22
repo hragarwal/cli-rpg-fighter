@@ -21,6 +21,12 @@ public class InputUtils {
     }
 
     public static int getChoice(BufferedReader inputTaker) throws IOException {
-        return parseInt(inputTaker.readLine());
+        int choice = 0;
+        try {
+            choice = parseInt(inputTaker.readLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Oops, invalid choice");
+        }
+        return choice;
     }
 }
